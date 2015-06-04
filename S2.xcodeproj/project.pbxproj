@@ -82,13 +82,13 @@
 			isa = PBXGroup;
 			children = (
 				146AB2BD1B1467B600A1FF04 /* AppDelegate.swift */,
-				146AB2BF1B1467B600A1FF04 /* ChecklistViewController.swift */,
+				142DEB471B1DA59500DC84DC /* ChecklistItem.swift */,
 				146AB2C11B1467B600A1FF04 /* Main.storyboard */,
+				146AB2BF1B1467B600A1FF04 /* ChecklistViewController.swift */,
+				140A98221B1F004F005034F0 /* AddItemViewController.swift */,
 				146AB2C41B1467B600A1FF04 /* Images.xcassets */,
 				146AB2C61B1467B600A1FF04 /* LaunchScreen.xib */,
 				146AB2BB1B1467B600A1FF04 /* Supporting Files */,
-				142DEB471B1DA59500DC84DC /* ChecklistItem.swift */,
-				140A98221B1F004F005034F0 /* AddItemViewController.swift */,
 			);
 			path = S2;
 			sourceTree = "<group>";
