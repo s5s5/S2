@@ -130,7 +130,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       let navigationController = segue.destinationViewController
                                  as! UINavigationController
       let controller = navigationController.topViewController
-                       as! AddItemViewController
+                       as! ItemDetailViewController
       controller.delegate = self
 
     } else if segue.identifier == "EditItem" {
@@ -138,7 +138,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       let navigationController = segue.destinationViewController
                                  as! UINavigationController
       let controller = navigationController.topViewController
-                       as! AddItemViewController
+                       as! ItemDetailViewController
 
       controller.delegate = self
 
@@ -150,11 +150,11 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
 
   }
 
-  func addItemViewControllerDidCancel(controller: AddItemViewController) {
+  func itemDetailViewControllerDidCancel(controller: ItemDetailViewController) {
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  func addItemViewController(controller: AddItemViewController,
+  func itemDetailViewController(controller: ItemDetailViewController,
       didFinishAddingItem item: ChecklistItem) {
     let newRowIndex = items.count
     items.append(item)
@@ -165,7 +165,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  func addItemViewController(controller: AddItemViewController,
+  func itemDetailViewController(controller: ItemDetailViewController,
       didFinishEditingItem item: ChecklistItem) {
     if let index = find(items, item) {
 
