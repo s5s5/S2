@@ -14,38 +14,22 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
 
   required init(coder aDecoder: NSCoder) {
     items = [ChecklistItem]()
-
-    let row0item = ChecklistItem()
-    row0item.text = "Walk the dog"
-    row0item.checked = false
-    items.append(row0item)
-
-    let row1item = ChecklistItem()
-    row1item.text = "Brush my teeth"
-    row1item.checked = true
-    items.append(row1item)
-
-    let row2item = ChecklistItem()
-    row2item.text = "Learn iOS development"
-    row2item.checked = true
-    items.append(row2item)
-
-    let row3item = ChecklistItem()
-    row3item.text = "Soccer practice"
-    row3item.checked = false
-    items.append(row3item)
-
-    let row4item = ChecklistItem()
-    row4item.text = "Eat ice cream"
-    row4item.checked = true
-    items.append(row4item)
-
-    let row5item = ChecklistItem()
-    row5item.text = "Mark APP"
-    row5item.checked = false
-    items.append(row5item)
-
     super.init(coder: aDecoder)
+    loadChecklistItems()
+  }
+
+  func loadChecklistItems() {
+    let path = dataFilePath()
+
+    if NSFileManager.defaultManager().fileExistsAtPath(path) {
+
+      if let data = NSData(contentsOfFile: path) {
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+        items = unarchiver.decodeObjectForKey("ChecklistItems")
+        as! [ChecklistItem]
+        unarchiver.finishDecoding()
+      }
+    }
   }
 
   override func tableView(tableView: UITableView,
@@ -68,6 +52,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     return cell
   }
 
+  // 打勾方法
   override func tableView(tableView: UITableView,
       didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -83,6 +68,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
   }
 
+  // 删除方法
   override func tableView(tableView: UITableView,
       commitEditingStyle editingStyle: UITableViewCellEditingStyle,
       forRowAtIndexPath indexPath: NSIndexPath) {
@@ -93,6 +79,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     // 2
     let indexPaths = [indexPath]
     tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+    saveChecklistItems()
   }
 
   override func viewDidLoad() {
@@ -154,6 +141,7 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     dismissViewControllerAnimated(true, completion: nil)
   }
 
+  // 点击添加方法
   func itemDetailViewController(controller: ItemDetailViewController,
       didFinishAddingItem item: ChecklistItem) {
     let newRowIndex = items.count
@@ -163,8 +151,10 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     tableView.insertRowsAtIndexPaths(indexPaths,
         withRowAnimation: .Automatic)
     dismissViewControllerAnimated(true, completion: nil)
+    saveChecklistItems()
   }
 
+  // 点击编辑方法
   func itemDetailViewController(controller: ItemDetailViewController,
       didFinishEditingItem item: ChecklistItem) {
     if let index = find(items, item) {
@@ -176,6 +166,26 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       }
     }
     dismissViewControllerAnimated(true, completion: nil)
+    saveChecklistItems()
+  }
+
+  func documentsDirectory() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(
+                .DocumentDirectory, .UserDomainMask, true) as! [String]
+    return paths[0]
+  }
+
+  func dataFilePath() -> String {
+    return documentsDirectory().stringByAppendingPathComponent(
+    "Checklists.plist")
+  }
+
+  func saveChecklistItems() {
+    let data = NSMutableData()
+    let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+    archiver.encodeObject(items, forKey: "ChecklistItems")
+    archiver.finishEncoding()
+    data.writeToFile(dataFilePath(), atomically: true)
   }
 
 }
