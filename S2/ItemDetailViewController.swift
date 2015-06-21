@@ -8,6 +8,8 @@
 
 import UIKit
 
+// 接口
+
 protocol AddItemViewControllerDelegate: class {
   func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
 

@@ -11,18 +11,23 @@ import UIKit
 class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
 
   var items: [ChecklistItem]
+  var checklist: Checklist!
 
   required init(coder aDecoder: NSCoder) {
     items = [ChecklistItem]()
+    // 初始化
     super.init(coder: aDecoder)
     loadChecklistItems()
   }
 
+  // 加载数据
   func loadChecklistItems() {
     let path = dataFilePath()
 
+    // 如果PLIST存在
     if NSFileManager.defaultManager().fileExistsAtPath(path) {
 
+      // 读取
       if let data = NSData(contentsOfFile: path) {
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
         items = unarchiver.decodeObjectForKey("ChecklistItems")
@@ -73,18 +78,19 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
       commitEditingStyle editingStyle: UITableViewCellEditingStyle,
       forRowAtIndexPath indexPath: NSIndexPath) {
 
-    // 1
     items.removeAtIndex(indexPath.row)
 
-    // 2
     let indexPaths = [indexPath]
     tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
     saveChecklistItems()
   }
 
+  // VIEW加载时方法
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    tableView.rowHeight = 44
+    //不同的checklist时会显⽰示不同的标题
+    title = checklist.name
   }
 
   override func didReceiveMemoryWarning() {
@@ -169,19 +175,23 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     saveChecklistItems()
   }
 
+  // 获取沙盒路径
   func documentsDirectory() -> String {
     let paths = NSSearchPathForDirectoriesInDomains(
                 .DocumentDirectory, .UserDomainMask, true) as! [String]
     return paths[0]
   }
 
+  // 获取PLIST文件
   func dataFilePath() -> String {
     return documentsDirectory().stringByAppendingPathComponent(
     "Checklists.plist")
   }
 
+  // 写⼊PLIST文件
   func saveChecklistItems() {
     let data = NSMutableData()
+    // NSKeyedArchiver 对数组进⾏行编码
     let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
     archiver.encodeObject(items, forKey: "ChecklistItems")
     archiver.finishEncoding()
