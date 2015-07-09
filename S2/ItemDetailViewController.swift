@@ -10,7 +10,7 @@ import UIKit
 
 // 接口
 
-protocol AddItemViewControllerDelegate: class {
+protocol ItemDetailViewControllerDelegate: class {
   func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
 
   func itemDetailViewController(controller: ItemDetailViewController,
@@ -25,7 +25,25 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
 
-  weak var delegate: AddItemViewControllerDelegate?
+  weak var delegate: ItemDetailViewControllerDelegate?
+
+  var itemToEdit: ChecklistItem?
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    tableView.rowHeight = 44
+
+    if let item = itemToEdit {
+      title = "Edit Item"
+      textField.text = item.text
+      doneBarButton.enabled = true
+    }
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    textField.becomeFirstResponder()
+  }
 
   @IBAction func cancel() {
     delegate?.itemDetailViewControllerDidCancel(self)
@@ -52,10 +70,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     return nil
   }
 
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    textField.becomeFirstResponder()
-  }
 
   func textField(textField: UITextField,
       shouldChangeCharactersInRange range: NSRange,
@@ -68,19 +82,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     doneBarButton.enabled = (newText.length > 0)
 
     return true
-  }
-
-  var itemToEdit: ChecklistItem?
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    tableView.rowHeight = 44
-
-    if let item = itemToEdit {
-      title = "Edit Item"
-      textField.text = item.text
-      doneBarButton.enabled = true
-    }
   }
 
 

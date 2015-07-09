@@ -87,17 +87,17 @@
 		146AB2BA1B1467B600A1FF04 /* S2 */ = {
 			isa = PBXGroup;
 			children = (
+				146AB2C61B1467B600A1FF04 /* LaunchScreen.xib */,
+				146AB2BD1B1467B600A1FF04 /* AppDelegate.swift */,
 				146AB2BB1B1467B600A1FF04 /* Supporting Files */,
 				146AB2C41B1467B600A1FF04 /* Images.xcassets */,
 				146AB2C11B1467B600A1FF04 /* Main.storyboard */,
-				146AB2BD1B1467B600A1FF04 /* AppDelegate.swift */,
-				142DEB471B1DA59500DC84DC /* ChecklistItem.swift */,
-				146AB2BF1B1467B600A1FF04 /* ChecklistViewController.swift */,
-				140A98221B1F004F005034F0 /* ItemDetailViewController.swift */,
-				146AB2C61B1467B600A1FF04 /* LaunchScreen.xib */,
 				140E36B61B36579600D84458 /* AllListsViewController.swift */,
-				140E36B81B36998500D84458 /* Checklist.swift */,
 				140E36BC1B37186B00D84458 /* ListDetailViewController.swift */,
+				140A98221B1F004F005034F0 /* ItemDetailViewController.swift */,
+				146AB2BF1B1467B600A1FF04 /* ChecklistViewController.swift */,
+				140E36B81B36998500D84458 /* Checklist.swift */,
+				142DEB471B1DA59500DC84DC /* ChecklistItem.swift */,
 			);
 			path = S2;
 			sourceTree = "<group>";
@@ -312,7 +312,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -350,7 +350,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

@@ -16,23 +16,14 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   // 其中initWithCoder⽤用于从storyboard中加载视图控制器
   // initWithNib⽤用于从nib⽂文件中加载视图控制器
   // 而initWithStyle则⽤用于⼿手动创建视图控制器。
-  required init(coder aDeCoder: NSCoder) {
+  required init(coder aDecoder: NSCoder) {
 
     lists = [Checklist]()
 
-    super.init(coder: aDeCoder)
+    super.init(coder: aDecoder)
 
-    var list = Checklist(name: "Birthdays")
-    lists.append(list)
-
-    list = Checklist(name: "Groceries")
-    lists.append(list)
-
-    list = Checklist(name: "Cool Apps")
-    lists.append(list)
-
-    list = Checklist(name: "To Do")
-    lists.append(list)
+//    println("\(dataFilePath())")
+    loadChecklists()
   }
 
   override func viewDidLoad() {
@@ -136,4 +127,36 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     presentViewController(navigationController, animated: true, completion: nil)
   }
 
+  // 获取PLIST文件夹路径
+  func documentsDirectory() -> String {
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
+
+    return paths[0]
+  }
+
+  // 获取PLIST文件路径
+  func dataFilePath() -> String {
+    return documentsDirectory().stringByAppendingPathComponent("Checklists.plist")
+  }
+
+  // save to plist
+  func saveChecklists() {
+    let data = NSMutableData()
+    let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+    archiver.encodeObject(lists, forKey: "Checklists")
+    archiver.finishEncoding()
+    data.writeToFile(dataFilePath(), atomically: true)
+  }
+
+  // load form plist
+  func loadChecklists() {
+    let path = dataFilePath()
+    if NSFileManager.defaultManager().fileExistsAtPath(path) {
+      if let data = NSData(contentsOfFile: path) {
+        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
+        lists = unarchiver.decodeObjectForKey("Checklists") as! [Checklist]
+        unarchiver.finishDecoding()
+      }
+    }
+  }
 }
