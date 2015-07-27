@@ -13,11 +13,9 @@ import UIKit
 protocol ItemDetailViewControllerDelegate: class {
   func itemDetailViewControllerDidCancel(controller: ItemDetailViewController)
 
-  func itemDetailViewController(controller: ItemDetailViewController,
-      didFinishAddingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishAddingItem item: ChecklistItem)
 
-  func itemDetailViewController(controller: ItemDetailViewController,
-      didFinishEditingItem item: ChecklistItem)
+  func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem)
 }
 
 class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
@@ -64,20 +62,15 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
 
   }
 
-  override func tableView(tableView: UITableView,
-      willSelectRowAtIndexPath indexPath: NSIndexPath)
-          -> NSIndexPath? {
+  override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
     return nil
   }
 
 
-  func textField(textField: UITextField,
-      shouldChangeCharactersInRange range: NSRange,
-      replacementString string: String) -> Bool {
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
 
     let oldText: NSString = textField.text
-    let newText: NSString = oldText.stringByReplacingCharactersInRange(range,
-        withString: string)
+    let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
 
     doneBarButton.enabled = (newText.length > 0)
 

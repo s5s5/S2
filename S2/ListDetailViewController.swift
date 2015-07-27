@@ -11,16 +11,13 @@ import UIKit
 protocol ListDetailViewControllerDelegate: class {
   func listDetailViewControllerDidCancel(controller: ListDetailViewController)
 
-  func listDetailViewController(controller: ListDetailViewController,
-      didFinishAddingChecklist checklist: Checklist)
+  func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist)
 
-  func listDetailViewController(controller: ListDetailViewController,
-      didFinishEditingChecklist checklist: Checklist)
+  func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist)
 
 }
 
-class ListDetailViewController: UITableViewController,
-    UITextFieldDelegate {
+class ListDetailViewController: UITableViewController, UITextFieldDelegate {
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var doneBarButton: UIBarButtonItem!
 
@@ -51,12 +48,10 @@ class ListDetailViewController: UITableViewController,
   @IBAction func done() {
     if let checklist = checklistToEdit {
       checklist.name = textField.text
-      delegate?.listDetailViewController(self,
-          didFinishEditingChecklist: checklist)
+      delegate?.listDetailViewController(self, didFinishEditingChecklist: checklist)
     } else {
       let checklist = Checklist(name: textField.text)
-      delegate?.listDetailViewController(self,
-          didFinishAddingChecklist: checklist)
+      delegate?.listDetailViewController(self, didFinishAddingChecklist: checklist)
     }
   }
 
@@ -64,9 +59,7 @@ class ListDetailViewController: UITableViewController,
     return nil
   }
 
-  func textField(textField: UITextField,
-      shouldChangeCharactersInRange range: NSRange,
-      replacementString string: String) -> Bool {
+  func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
     let oldText: NSString = textField.text
     let newText: NSString = oldText.stringByReplacingCharactersInRange(range, withString: string)
 

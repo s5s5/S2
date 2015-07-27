@@ -8,23 +8,9 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate, UINavigationControllerDelegate {
 
-  var lists: [Checklist]
-
-  // 必要 构造函数 生成默认列表
-  // 其中initWithCoder⽤用于从storyboard中加载视图控制器
-  // initWithNib⽤用于从nib⽂文件中加载视图控制器
-  // 而initWithStyle则⽤用于⼿手动创建视图控制器。
-  required init(coder aDecoder: NSCoder) {
-
-    lists = [Checklist]()
-
-    super.init(coder: aDecoder)
-
-//    println("\(dataFilePath())")
-    loadChecklists()
-  }
+  var dataModel: DataModel!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,24 +22,21 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   }
 
   // 从数据源返回给定表格视图的行数
-  override func tableView(tableView: UITableView,
-      numberOfRowsInSection section: Int) -> Int {
-    return lists.count
+  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return dataModel.lists.count
   }
 
   // 问一个CELL中插入一个特定的表观位置数据源。
-  override func tableView(tableView: UITableView,
-      cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cellIdentifier = "Cell"
     // dequeueReusableCellWithIdentifier 返回可重⽤用的cell
     var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
     if cell == nil {
-      cell = UITableViewCell(style: .Default,
-          reuseIdentifier: cellIdentifier)
+      cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
     }
 
     // 为row行数据添加所需的cell
-    let checklist = lists[indexPath.row]
+    let checklist = dataModel.lists[indexPath.row]
     cell.textLabel!.text = checklist.name
     cell.accessoryType = .DetailDisclosureButton
 
@@ -61,10 +44,27 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   }
 
   // 当⽤用户触碰表视图中的某⼀行时就会触发这个代理⽅方法segue 
-  override func tableView(tableView: UITableView,
-      didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    let checklist = lists[indexPath.row]
+  override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    dataModel.indexOfSelectedChecklist = indexPath.row
+    let checklist = dataModel.lists[indexPath.row]
     performSegueWithIdentifier("ShowChecklist", sender: checklist)
+  }
+
+  override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    dataModel.lists.removeAtIndex(indexPath.row)
+
+    let indexPaths = [indexPath]
+    tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+  }
+
+  override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    let navigationController = storyboard!.instantiateViewControllerWithIdentifier("ListNavigationController") as! UINavigationController
+    let controller = navigationController.topViewController as! ListDetailViewController
+    controller.delegate = self
+
+    let checklist = dataModel.lists[indexPath.row]
+    controller.checklistToEdit = checklist
+    presentViewController(navigationController, animated: true, completion: nil)
   }
 
   // 事情即将完成通知视图
@@ -85,10 +85,9 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  func listDetailViewController(controller: ListDetailViewController,
-      didFinishAddingChecklist checklist: Checklist) {
-    let newRowIndex = lists.count
-    lists.append(checklist)
+  func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist) {
+    let newRowIndex = dataModel.lists.count
+    dataModel.lists.append(checklist)
 
     let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
     let indexPaths = [indexPath]
@@ -96,9 +95,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  func listDetailViewController(controller: ListDetailViewController,
-      didFinishEditingChecklist checklist: Checklist) {
-    if let index = find(lists, checklist) {
+  func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist) {
+    if let index = find(dataModel.lists, checklist) {
       let indexPath = NSIndexPath(forRow: index, inSection: 0)
       if let cell = tableView.cellForRowAtIndexPath(indexPath) {
         cell.textLabel!.text = checklist.name
@@ -107,56 +105,22 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     dismissViewControllerAnimated(true, completion: nil)
   }
 
-  override func tableView(tableView: UITableView,
-      commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-      forRowAtIndexPath indexPath: NSIndexPath) {
-    lists.removeAtIndex(indexPath.row)
 
-    let indexPaths = [indexPath]
-    tableView.deleteRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+  func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+    if viewController === self {
+      dataModel.indexOfSelectedChecklist = -1
+    }
   }
 
-  override func tableView(tableView: UITableView,
-      accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-    let navigationController = storyboard!.instantiateViewControllerWithIdentifier("ListNavigationController") as! UINavigationController
-    let controller = navigationController.topViewController as! ListDetailViewController
-    controller.delegate = self
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
 
-    let checklist = lists[indexPath.row]
-    controller.checklistToEdit = checklist
-    presentViewController(navigationController, animated: true, completion: nil)
-  }
+    navigationController?.delegate = self
 
-  // 获取PLIST文件夹路径
-  func documentsDirectory() -> String {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
-
-    return paths[0]
-  }
-
-  // 获取PLIST文件路径
-  func dataFilePath() -> String {
-    return documentsDirectory().stringByAppendingPathComponent("Checklists.plist")
-  }
-
-  // save to plist
-  func saveChecklists() {
-    let data = NSMutableData()
-    let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-    archiver.encodeObject(lists, forKey: "Checklists")
-    archiver.finishEncoding()
-    data.writeToFile(dataFilePath(), atomically: true)
-  }
-
-  // load form plist
-  func loadChecklists() {
-    let path = dataFilePath()
-    if NSFileManager.defaultManager().fileExistsAtPath(path) {
-      if let data = NSData(contentsOfFile: path) {
-        let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
-        lists = unarchiver.decodeObjectForKey("Checklists") as! [Checklist]
-        unarchiver.finishDecoding()
-      }
+    let index = dataModel.indexOfSelectedChecklist
+    if index >= 0 && index < dataModel.lists.count {
+      let checklist = dataModel.lists[index]
+      performSegueWithIdentifier("ShowChecklist", sender: checklist)
     }
   }
 }
