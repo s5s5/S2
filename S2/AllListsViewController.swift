@@ -32,13 +32,24 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     // dequeueReusableCellWithIdentifier 返回可重⽤用的cell
     var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
     if cell == nil {
-      cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
+      cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
     }
 
     // 为row行数据添加所需的cell
     let checklist = dataModel.lists[indexPath.row]
     cell.textLabel!.text = checklist.name
     cell.accessoryType = .DetailDisclosureButton
+
+    let count = checklist.countUncheckedItems()
+    if checklist.items.count == 0 {
+      cell.detailTextLabel!.text = "(No Items)"
+    } else if count == 0 {
+      cell.detailTextLabel!.text = "All Done!"
+    } else {
+      cell.detailTextLabel!.text = "\(count) Remaining"
+    }
+    
+    cell.imageView!.image = UIImage(named: checklist.iconName)
 
     return cell
   }
@@ -86,22 +97,15 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   }
 
   func listDetailViewController(controller: ListDetailViewController, didFinishAddingChecklist checklist: Checklist) {
-    let newRowIndex = dataModel.lists.count
     dataModel.lists.append(checklist)
-
-    let indexPath = NSIndexPath(forRow: newRowIndex, inSection: 0)
-    let indexPaths = [indexPath]
-    tableView.insertRowsAtIndexPaths(indexPaths, withRowAnimation: .Automatic)
+    dataModel.sortChecklists()
+    tableView.reloadData()
     dismissViewControllerAnimated(true, completion: nil)
   }
 
   func listDetailViewController(controller: ListDetailViewController, didFinishEditingChecklist checklist: Checklist) {
-    if let index = find(dataModel.lists, checklist) {
-      let indexPath = NSIndexPath(forRow: index, inSection: 0)
-      if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-        cell.textLabel!.text = checklist.name
-      }
-    }
+    dataModel.sortChecklists()
+    tableView.reloadData()
     dismissViewControllerAnimated(true, completion: nil)
   }
 
@@ -122,5 +126,10 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
       let checklist = dataModel.lists[index]
       performSegueWithIdentifier("ShowChecklist", sender: checklist)
     }
+  }
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
   }
 }
