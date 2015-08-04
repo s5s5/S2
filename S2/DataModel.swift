@@ -11,16 +11,6 @@ import Foundation
 class DataModel {
   var lists = [Checklist]()
 
-  var indexOfSelectedChecklist: Int {
-    get {
-      return NSUserDefaults.standardUserDefaults().integerForKey("ChecklistIndex")
-    }
-    set {
-      NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "ChecklistIndex")
-      NSUserDefaults.standardUserDefaults().synchronize()
-    }
-  }
-
   init() {
     loadChecklists()
     registerDefaults()
@@ -56,6 +46,7 @@ class DataModel {
         let unarchiver = NSKeyedUnarchiver(forReadingWithData: data)
         lists = unarchiver.decodeObjectForKey("Checklists") as! [Checklist]
         unarchiver.finishDecoding()
+
         sortChecklists()
       }
     }
@@ -64,7 +55,18 @@ class DataModel {
   // first open
   func registerDefaults() {
     let dictionary = ["ChecklistIndex": -1, "FirstTime": true]
+    
     NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
+  }
+
+  var indexOfSelectedChecklist: Int {
+    get {
+      return NSUserDefaults.standardUserDefaults().integerForKey("ChecklistIndex")
+    }
+    set {
+      NSUserDefaults.standardUserDefaults().setInteger(newValue, forKey: "ChecklistIndex")
+      NSUserDefaults.standardUserDefaults().synchronize()
+    }
   }
 
   func handleFirstTime() {
