@@ -68,20 +68,24 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
   func configureCheckmarkForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
     let label = cell.viewWithTag(1001) as! UILabel
-    label.textColor = view.tintColor
 
     if item.checked {
       label.text = "✓"
     } else {
       label.text = "❍"
     }
+
+    label.textColor = view.tintColor
   }
 
   func configureTextForCell(cell: UITableViewCell, withChecklistItem item: ChecklistItem) {
     let label = cell.viewWithTag(1000) as! UILabel
     label.text = item.text
+//    label.text = "\(item.itemID): \(item.text)"
+    
+//    let labelDate = cell.viewWithTag(2000) as! UILabel
+//    labelDate.text = "\(item.dueDate)"
   }
-
 
   // 点击取消方法
   func itemDetailViewControllerDidCancel(controller: ItemDetailViewController) {
