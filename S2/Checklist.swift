@@ -15,7 +15,7 @@ class Checklist: NSObject, NSCoding {
 
   // 构造函数
   convenience init(name: String) {
-    self.init(name: name, iconName: "Folder")
+    self.init(name: name, iconName: "Party")
   }
 
   init(name: String, iconName: String) {
