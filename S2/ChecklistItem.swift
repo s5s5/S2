@@ -52,14 +52,14 @@ class ChecklistItem: NSObject, NSCoding {
     aCoder.encodeBool(shouldRemind, forKey: "ShouldRemind")
     aCoder.encodeInteger(itemID, forKey: "ItemID")
   }
-  
+
   func scheduleNotification() {
     let existingNotification = notificationForThisItem()
     if let notification = existingNotification {
       println("Found an existing notification \(notification)")
       UIApplication.sharedApplication().cancelLocalNotification(notification)
     }
-    
+
     if shouldRemind && dueDate.compare(NSDate()) != NSComparisonResult.OrderedAscending {
       let localNotification = UILocalNotification()
       localNotification.fireDate = dueDate
@@ -67,13 +67,13 @@ class ChecklistItem: NSObject, NSCoding {
       localNotification.alertBody = text
       localNotification.soundName = UILocalNotificationDefaultSoundName
       localNotification.userInfo = ["ItemID": itemID]
-      
+
       UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-      
+
       println("Scheduled notification \(localNotification) for itemID \(itemID)")
     }
   }
-  
+
   func notificationForThisItem() -> UILocalNotification? {
     let allNotifications = UIApplication.sharedApplication().scheduledLocalNotifications as! [UILocalNotification]
     for notification in allNotifications {
@@ -85,7 +85,7 @@ class ChecklistItem: NSObject, NSCoding {
     }
     return nil
   }
-  
+
   deinit {
     let existingNotification = notificationForThisItem()
     if let notification = existingNotification {

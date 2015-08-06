@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let navigationController = window!.rootViewController as! UINavigationController
     let controller = navigationController.viewControllers[0] as! AllListsViewController
     controller.dataModel = dataModel
-    
+
 //    let notificationSettings = UIUserNotificationSettings(forTypes: UIUserNotificationType.Alert | .Sound, categories: nil)
 //    UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 //    
@@ -32,10 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //    localNotification.soundName = UILocalNotificationDefaultSoundName
 //    
 //    UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-    
+
     return true
   }
-  
+
   func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
     println("didReceiveLocalNotification \(notification)")
   }

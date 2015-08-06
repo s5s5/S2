@@ -55,7 +55,7 @@ class DataModel {
   // first open
   func registerDefaults() {
     let dictionary = ["ChecklistIndex": -1, "FirstTime": true, "ChecklisItemID": 0]
-    
+
     NSUserDefaults.standardUserDefaults().registerDefaults(dictionary)
   }
 
@@ -73,7 +73,7 @@ class DataModel {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let firstTime = userDefaults.boolForKey("FirstTime")
     if firstTime {
-      let checklist = Checklist(name: "List")
+      let checklist = Checklist(name: "💴💶💷💵")
       lists.append(checklist)
       indexOfSelectedChecklist = 0
       userDefaults.setBool(false, forKey: "FirstTime")
@@ -83,7 +83,7 @@ class DataModel {
   func sortChecklists() {
     lists.sort({ checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == NSComparisonResult.OrderedAscending })
   }
-  
+
   class func nextChecklistItemID() -> Int {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     let itemID = userDefaults.integerForKey("ChecklistItemID")

@@ -82,7 +82,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     let label = cell.viewWithTag(1000) as! UILabel
     label.text = item.text
 //    label.text = "\(item.itemID): \(item.text)"
-    
+
 //    let labelDate = cell.viewWithTag(2000) as! UILabel
 //    labelDate.text = "\(item.dueDate)"
   }
