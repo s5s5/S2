@@ -25,14 +25,14 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate, Icon
   weak var delegate: ListDetailViewControllerDelegate?
 
   var checklistToEdit: Checklist?
-  var iconName = "Folder"
+  var iconName = "Party"
 
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.rowHeight = 44
 
     if let checklist = checklistToEdit {
-      title = "Edit Checklist"
+      title = "➕🔸Ｅdit ＴoＤoＬist🔸➕"
       textField.text = checklist.name
       doneBarButton.enabled = true
       iconName = checklist.iconName

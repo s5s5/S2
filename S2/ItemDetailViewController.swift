@@ -38,7 +38,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     tableView.rowHeight = 44
 
     if let item = itemToEdit {
-      title = "Edit Item"
+      title = "➕🔸Ｅdit ＴoＤo🔸➕"
       textField.text = item.text
       doneBarButton.enabled = true
       shouldRemindSwitch.on = item.shouldRemind

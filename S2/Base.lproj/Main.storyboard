@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Name of the Checklist-->
+        <!--Ｎame ｏf ｔhe ＴoＤoＬist-->
         <scene sceneID="D81-BU-Y0j">
             <objects>
                 <tableViewController id="3u9-5u-GSO" customClass="ChecklistViewController" customModule="S2" customModuleProvider="target" sceneMemberID="viewController">
@@ -19,7 +19,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ppR-yt-L0c" id="BKm-UU-Vad">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBd-ev-n3q">
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="✅" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBd-ev-n3q">
                                             <rect key="frame" x="10" y="8" width="26" height="26.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="26" id="9Z6-Jg-3a3"/>
@@ -29,9 +29,9 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Checklist Item" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQ0-U7-MHY">
-                                            <rect key="frame" x="40" y="12" width="493" height="19.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ＴoＤoＬist Ｉtem" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQ0-U7-MHY">
+                                            <rect key="frame" x="40" y="9" width="493" height="26.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -62,7 +62,7 @@
                             <outlet property="delegate" destination="3u9-5u-GSO" id="SEt-b2-ZsE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Name of the Checklist" id="A6q-gH-tZO">
+                    <navigationItem key="navigationItem" title="Ｎame ｏf ｔhe ＴoＤoＬist" id="A6q-gH-tZO">
                         <barButtonItem key="rightBarButtonItem" title="➕" id="pgH-O8-97v">
                             <connections>
                                 <segue destination="pqz-E2-UHs" kind="presentation" identifier="AddItem" id="dSp-hh-NjE"/>
@@ -74,7 +74,7 @@
             </objects>
             <point key="canvasLocation" x="1167" y="338"/>
         </scene>
-        <!--➕🔸😂🌊🍟🎊🏀🚔⏰🔸➕-->
+        <!--➕🔸Ａdd ＴoＤo🔸➕-->
         <scene sceneID="rIw-jT-Zoz">
             <objects>
                 <tableViewController id="G2n-y1-2PL" customClass="ItemDetailViewController" customModule="S2" customModuleProvider="target" sceneMemberID="viewController">
@@ -95,7 +95,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43.5" id="Ua4-kS-HDI"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
                                                     <connections>
                                                         <action selector="done" destination="G2n-y1-2PL" eventType="editingDidEndOnExit" id="H0W-H6-ed7"/>
@@ -120,8 +120,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cdG-hP-0Cj" id="kAU-Z8-Vvd">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="🙀💣📢" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkk-K7-qsI">
-                                                    <rect key="frame" x="15" y="12" width="84" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙀Ｒemind Ｍe" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kkk-K7-qsI">
+                                                    <rect key="frame" x="15" y="12" width="111" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -135,7 +135,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="BBI-nx-OwZ" firstAttribute="trailing" secondItem="kAU-Z8-Vvd" secondAttribute="trailingMargin" id="KIS-zJ-aC1"/>
+                                                <constraint firstAttribute="centerY" secondItem="Kkk-K7-qsI" secondAttribute="centerY" id="OW6-lv-AgK"/>
                                                 <constraint firstAttribute="centerY" secondItem="BBI-nx-OwZ" secondAttribute="centerY" id="SG2-6S-3dv"/>
+                                                <constraint firstItem="Kkk-K7-qsI" firstAttribute="leading" secondItem="kAU-Z8-Vvd" secondAttribute="leading" constant="15" id="cKH-Wj-E6P"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -144,10 +146,10 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HHD-Cz-jPC" id="fFI-lv-TwD">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="⏰⏳🕒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fuk-hx-kS7">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="⏳Ｄue Ｄate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Fuk-hx-kS7">
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JJD-ky-IHR">
@@ -167,7 +169,7 @@
                             <outlet property="delegate" destination="G2n-y1-2PL" id="3SW-Bf-6hk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="➕🔸😂🌊🍟🎊🏀🚔⏰🔸➕" id="6e6-8L-hbp">
+                    <navigationItem key="navigationItem" title="➕🔸Ａdd ＴoＤo🔸➕" id="6e6-8L-hbp">
                         <barButtonItem key="leftBarButtonItem" title="🔙" id="A1I-le-pSE">
                             <connections>
                                 <action selector="cancel" destination="G2n-y1-2PL" id="Ebt-yd-kRs"/>
@@ -208,7 +210,7 @@
             </objects>
             <point key="canvasLocation" x="1167" y="-1208"/>
         </scene>
-        <!--➕🔸✔️📈✅☑️🎷🔸➕-->
+        <!--➕🔸Ａdd ＴoＤoＬist🔸➕-->
         <scene sceneID="zWh-vK-rGW">
             <objects>
                 <tableViewController id="pFd-it-KI9" customClass="ListDetailViewController" customModule="S2" customModuleProvider="target" sceneMemberID="viewController">
@@ -260,8 +262,8 @@
                                                         <constraint firstAttribute="width" constant="36" id="hRk-Qj-6eK"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙋🏻🙆🏻🙅🏻💁🏻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HD-P8-oKa">
-                                                    <rect key="frame" x="0.0" y="11" width="88" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙆🏻Ｉcon🙅🏻" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6HD-P8-oKa">
+                                                    <rect key="frame" x="0.0" y="11" width="90" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -298,7 +300,7 @@
                             <outlet property="delegate" destination="pFd-it-KI9" id="tL9-yJ-ZG3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="➕🔸✔️📈✅☑️🎷🔸➕" id="dfg-Om-j0e">
+                    <navigationItem key="navigationItem" title="➕🔸Ａdd ＴoＤoＬist🔸➕" id="dfg-Om-j0e">
                         <barButtonItem key="leftBarButtonItem" title="🔙" id="WOj-4s-CMk">
                             <connections>
                                 <action selector="cancel" destination="pFd-it-KI9" id="m5P-ua-xlC"/>
@@ -320,7 +322,7 @@
             </objects>
             <point key="canvasLocation" x="1876" y="338"/>
         </scene>
-        <!--➕🔸🙋🏻🙆🏻🙅🏻💁🏻🔸➕-->
+        <!--🙆🏻Ｃhoose Ｉcon🙅🏻-->
         <scene sceneID="dau-62-vJS">
             <objects>
                 <tableViewController id="RgN-A1-klQ" customClass="IconPickerViewController" customModule="S2" customModuleProvider="target" sceneMemberID="viewController">
@@ -349,7 +351,7 @@
                             <outlet property="delegate" destination="RgN-A1-klQ" id="olj-WB-u1a"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="➕🔸🙋🏻🙆🏻🙅🏻💁🏻🔸➕" id="FYW-k8-a8P"/>
+                    <navigationItem key="navigationItem" title="🙆🏻Ｃhoose Ｉcon🙅🏻" id="FYW-k8-a8P"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWD-Lc-TnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -371,7 +373,7 @@
             </objects>
             <point key="canvasLocation" x="1876" y="-416"/>
         </scene>
-        <!--🔸✔️📈✅☑️🎷🔸-->
+        <!--🔸✔️📈✅☑️🎷ＴoＤo🔸-->
         <scene sceneID="7BM-rU-B7B">
             <objects>
                 <tableViewController id="46B-UT-UOP" customClass="AllListsViewController" customModule="S2" customModuleProvider="target" sceneMemberID="viewController">
@@ -384,7 +386,7 @@
                             <outlet property="delegate" destination="46B-UT-UOP" id="bUK-gt-KW0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="🔸✔️📈✅☑️🎷🔸" id="rnw-FG-q4b">
+                    <navigationItem key="navigationItem" title="🔸✔️📈✅☑️🎷ＴoＤo🔸" id="rnw-FG-q4b">
                         <barButtonItem key="rightBarButtonItem" title="➕" id="hxS-0w-VGf">
                             <connections>
                                 <segue destination="9Vm-WW-tF3" kind="presentation" identifier="AddChecklist" id="GxA-or-ecc"/>
