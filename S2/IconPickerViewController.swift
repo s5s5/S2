@@ -22,12 +22,12 @@ class IconPickerViewController: UITableViewController {
   }
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("IconCell") as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("IconCell") as UITableViewCell?
     let iconName = icons[indexPath.row]
-    cell.textLabel!.text = iconName
-    cell.imageView!.image = UIImage(named: iconName)
+    cell!.textLabel!.text = iconName
+    cell!.imageView!.image = UIImage(named: iconName)
 
-    return cell
+    return cell!
   }
 
   override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

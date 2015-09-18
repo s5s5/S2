@@ -24,7 +24,7 @@ class Checklist: NSObject, NSCoding {
     super.init()
   }
 
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     name = aDecoder.decodeObjectForKey("Name") as! String
     items = aDecoder.decodeObjectForKey("Items") as! [ChecklistItem]
     iconName = aDecoder.decodeObjectForKey("IconName") as! String

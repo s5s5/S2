@@ -19,14 +19,14 @@ class DataModel {
 
   // 获取PLIST文件夹路径
   func documentsDirectory() -> String {
-    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) as! [String]
+    let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true) 
 
     return paths[0]
   }
 
   // 获取PLIST文件路径
   func dataFilePath() -> String {
-    return documentsDirectory().stringByAppendingPathComponent("Checklists.plist")
+    return (documentsDirectory() as NSString).stringByAppendingPathComponent("Checklists.plist")
   }
 
   // save to plist
@@ -81,7 +81,7 @@ class DataModel {
   }
 
   func sortChecklists() {
-    lists.sort({ checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == NSComparisonResult.OrderedAscending })
+    lists.sortInPlace({ checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == NSComparisonResult.OrderedAscending })
   }
 
   class func nextChecklistItemID() -> Int {

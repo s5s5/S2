@@ -31,7 +31,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("ChecklistItem") as UITableViewCell!
 
     let item = checklist.items[indexPath.row]
 
@@ -107,7 +107,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
   // 点击编辑方法
   func itemDetailViewController(controller: ItemDetailViewController, didFinishEditingItem item: ChecklistItem) {
-    if let index = find(checklist.items, item) {
+    if let index = checklist.items.indexOf(item) {
 
       let indexPath = NSIndexPath(forRow: index, inSection: 0)
 

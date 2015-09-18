@@ -54,7 +54,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cellIdentifier = "Cell"
     // dequeueReusableCellWithIdentifier 返回可重⽤用的cell
-    var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
+    var cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as UITableViewCell?
     if cell == nil {
       cell = UITableViewCell(style: .Subtitle, reuseIdentifier: cellIdentifier)
     }

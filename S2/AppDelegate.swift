@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-    println("didReceiveLocalNotification \(notification)")
+    print("didReceiveLocalNotification \(notification)")
   }
 
   func applicationWillResignActive(application: UIApplication) {
